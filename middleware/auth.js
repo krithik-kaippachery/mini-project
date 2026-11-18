@@ -2,6 +2,7 @@
 // JWT verification middleware — protects any route that requires login
 
 const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET || "dreamspace_secret_key_2026";
 
 /**
  * verifyToken — Express middleware
@@ -34,7 +35,7 @@ function verifyToken(req, res, next) {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded; // { id, email, name, iat, exp }
         next();
     } catch (err) {

@@ -5,11 +5,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserStore = require('../models/userStore');
 
+const JWT_SECRET = process.env.JWT_SECRET || "dreamspace_secret_key_2026";
+
 // ─── Helper ─────────────────────────────────────────────────────────────────
 function signToken(user) {
     return jwt.sign(
         { id: user.id, email: user.email, name: user.name },
-        process.env.JWT_SECRET,
+        JWT_SECRET,
         { expiresIn: '24h' }
     );
 }
@@ -29,7 +31,7 @@ exports.getLoginPage = (req, res) => {
     if (req.cookies && req.cookies.token) {
         try {
             const jwt_module = require('jsonwebtoken');
-            jwt_module.verify(req.cookies.token, process.env.JWT_SECRET);
+            jwt_module.verify(req.cookies.token, JWT_SECRET);
             return res.redirect('/dashboard');
         } catch { /* token invalid — show login */ }
     }
@@ -103,7 +105,7 @@ exports.register = (req, res) => {
 exports.checkStatus = (req, res) => {
     if (req.cookies && req.cookies.token) {
         try {
-            const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(req.cookies.token, JWT_SECRET);
             return res.json({ loggedIn: true, user: { id: decoded.id, name: decoded.name, email: decoded.email } });
         } catch {
             return res.json({ loggedIn: false });
