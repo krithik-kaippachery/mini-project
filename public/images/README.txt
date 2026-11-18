@@ -1,0 +1,1 @@
+Place your custom images and videos in this folder. Make sure the filenames match the ones referenced in the HTML files (e.g., hero-video.mp4, project-1.jpg, team-1.jpg, etc.).

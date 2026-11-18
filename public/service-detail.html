@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Service Showcase & Photo Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Navigation -->
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <span>Dreamspace</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="service-detail.html" class="active">Services</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="index.html">Login</a></li>
+        </ul>
+        <a href="contact.html" class="btn-contact">Get a Quote</a>
+    </nav>
+
+    <!-- Sub-Navigation Service Switcher -->
+    <div class="service-subnav">
+        <div class="subnav-container">
+            <div class="subnav-label">Our Services:</div>
+            <div class="subnav-tabs" id="subnav-tabs">
+                <a href="?id=architecture" class="subnav-tab" data-service="architecture">
+                    <span>🏛️</span> Architectural Design
+                </a>
+                <a href="?id=interior" class="subnav-tab" data-service="interior">
+                    <span>🛋️</span> Interior Design
+                </a>
+                <a href="?id=construction" class="subnav-tab" data-service="construction">
+                    <span>🏗️</span> Construction
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Hero -->
+    <div class="detail-hero">
+        <img id="service-hero" src="images/architecture-hero.jpg" alt="Service Hero Banner">
+        <div class="detail-hero-content">
+            <div class="detail-hero-breadcrumb">
+                <a href="home.html">Home</a> &nbsp;/&nbsp; <a href="home.html#services-section">Services</a> &nbsp;/&nbsp; <span id="breadcrumb-current">Architectural Design</span>
+            </div>
+            <div class="detail-hero-tag" id="service-badge">✦ Signature Architecture</div>
+            <h1 id="service-title">Architectural Design</h1>
+            <p id="service-subtitle">Visionary structures, sustainable engineering, and iconic landmarks built for modern living.</p>
+            <div class="detail-hero-actions">
+                <a href="#gallery-section" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    View Photos (<span id="hero-photo-count">10</span>)
+                </a>
+                <a href="contact.html" class="btn-outline">Request Consultation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body Layout -->
+    <main class="detail-body">
+        <!-- Left Content -->
+        <div class="detail-text">
+            <h2 id="service-heading">Form Meets Function & Vision</h2>
+            <p id="service-p1"></p>
+            <p id="service-p2"></p>
+
+            <!-- Stats Bar -->
+            <div class="detail-stats-bar" id="service-stats-bar"></div>
+
+            <!-- Photo Gallery Section -->
+            <section class="gallery-section-wrapper" id="gallery-section">
+                <div class="gallery-header-row">
+                    <div class="gallery-header-left">
+                        <h3>
+                            <span>Project Photos</span>
+                            <span class="gallery-badge" id="gallery-count-badge">10 Photos</span>
+                        </h3>
+                        <p>High-resolution captures of our executed spaces, structural renders, and custom finishes.</p>
+                    </div>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="gallery-filter-bar" id="gallery-filter-bar"></div>
+
+                <!-- Photo Cards Grid -->
+                <div class="detail-gallery" id="service-gallery"></div>
+            </section>
+        </div>
+
+        <!-- Right Sticky Sidebar -->
+        <aside class="detail-sidebar">
+            <h3>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--primary)"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                What's Included
+            </h3>
+            <ul id="service-features"></ul>
+
+            <!-- Consultation Box -->
+            <div class="sidebar-consult-card">
+                <h4>Start Your Project</h4>
+                <p>Discuss your vision with our senior architects and interior specialists.</p>
+                <a href="contact.html" class="btn-primary" style="display:block; text-align:center; padding:12px 20px;">Book Consultation</a>
+            </div>
+
+            <!-- Other Services Navigation -->
+            <div class="sidebar-links">
+                <div class="sidebar-links-title">Other Services</div>
+                <div id="sidebar-other-services"></div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+        <button class="lightbox-arrow prev" id="lightbox-prev" aria-label="Previous Photo">&#10094;</button>
+        <button class="lightbox-arrow next" id="lightbox-next" aria-label="Next Photo">&#10095;</button>
+        
+        <div class="lightbox-content-wrapper">
+            <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded Preview">
+            <div class="lightbox-info">
+                <div class="lightbox-title" id="lightbox-title">Photo Title</div>
+                <div class="lightbox-counter" id="lightbox-counter">Photo 1 of 10</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // ─── SERVICES DATA DICTIONARY ───
+        const servicesData = {
+            'architecture': {
+                id: 'architecture',
+                icon: '🏛️',
+                title: 'Architectural Design',
+                subtitle: 'Visionary structures, sustainable engineering, and iconic landmarks built for modern living.',
+                badge: '✦ Signature Architecture',
+                heroImg: 'images/architecture-hero.jpg',
+                heading: 'Form Meets Function & Vision',
+                p1: 'Our architectural design process begins with a deep understanding of your lifestyle, the surrounding topography, and structural possibilities. We don\'t just design buildings; we sculpt living spaces that inspire and endure through cutting-edge 3D modeling and sustainable engineering.',
+                p2: 'From minimalist coastal residences overlooking the ocean to sophisticated urban developments, our architects bring decades of global experience to every blueprint. We oversee everything from initial conceptual sketches to final structural blueprints, ensuring a seamless transition into physical construction.',
+                stats: [
+                    { num: '350+', lbl: 'Completed Builds' },
+                    { num: '19', lbl: 'Awards Won' },
+                    { num: '100%', lbl: 'Bespoke Plans' }
+                ],
+                features: [
+                    'Site analysis & topographical feasibility',
+                    'Conceptual 3D modeling & photorealistic renders',
+                    'Structural engineering & blueprint drafting',
+                    'Sustainable, energy-efficient & green design',
+                    'Permit acquisition & zoning clearance',
+                    'Comprehensive construction documentation'
+                ],
+                categories: ['All', 'Villas', 'Exteriors', 'High-Rise', 'Concepts'],
+                defaultPhotos: [
+                    { id: 'arch-1', title: 'Cantilevered Horizon Villa', category: 'Villas', src: 'images/architecture-1.jpg' },
+                    { id: 'arch-2', title: 'Modern Coastal Estate', category: 'Exteriors', src: 'images/architecture-2.jpg' },
+                    { id: 'arch-3', title: 'Contemporary Glass Residence', category: 'Villas', src: 'images/architecture-3.jpg' },
+                    { id: 'arch-4', title: 'Terrace & Architectural Facade', category: 'Exteriors', src: 'images/architecture-4.jpg' },
+                    { id: 'arch-5', title: 'Suburban Luxury Masterpiece', category: 'Exteriors', src: 'images/architecture-5.jpg' },
+                    { id: 'arch-6', title: 'Geometric Stone & Wood Facade', category: 'Concepts', src: 'images/architecture-6.jpg' },
+                    { id: 'arch-7', title: 'Illuminated Infinity Pool Villa', category: 'Villas', src: 'images/architecture-7.jpg' },
+                    { id: 'arch-8', title: 'Minimalist White Pavilion', category: 'Villas', src: 'images/architecture-8.jpg' },
+                    { id: 'arch-9', title: 'Urban Skyscraper Glass Facade', category: 'High-Rise', src: 'images/architecture-9.jpg' },
+                    { id: 'arch-10', title: 'Modern Organic Hillside Manor', category: 'Concepts', src: 'images/architecture-10.jpg' }
+                ]
+            },
+            'interior': {
+                id: 'interior',
+                icon: '🛋️',
+                title: 'Interior Design',
+                subtitle: 'Curating the soul of your space with bespoke elegance, rich textures, and timeless harmony.',
+                badge: '✦ Luxury Interior',
+                heroImg: 'images/interior-hero.jpg',
+                heading: 'Elevated Everyday Living & Bespoke Comfort',
+                p1: 'Interior design is the art of translating your individuality into an immersive physical sanctuary. Our interior team creates bespoke environments that are as effortless to inhabit as they are breathtaking to admire. Every element is meticulously calibrated—from architectural millwork and statement ambient lighting to the exact weave of custom fabrics.',
+                p2: 'Through exclusive partnerships with premier global artisans and bespoke furniture ateliers, we source rare natural marbles, smoked hardwoods, and handcrafted fixtures unavailable anywhere else. The result is a cohesive aesthetic narrative tailored exclusively to your way of life.',
+                stats: [
+                    { num: '420+', lbl: 'Interiors Curated' },
+                    { num: '99%', lbl: 'Client Satisfaction' },
+                    { num: '100%', lbl: 'Custom Furnishings' }
+                ],
+                features: [
+                    'Comprehensive space planning & ergonomic flow',
+                    'Custom furniture sourcing & bespoke millwork',
+                    'Smart lighting design & scene automation',
+                    'Material, texture & color harmony selection',
+                    'Fine art & sculpture curation',
+                    'Full turnkey white-glove installation'
+                ],
+                categories: ['All', 'Living', 'Suites', 'Kitchen', 'Dining', 'Bath'],
+                defaultPhotos: [
+                    { id: 'int-1', title: 'Nordic Living Lounge', category: 'Living', src: 'images/interior-1.jpg' },
+                    { id: 'int-2', title: 'Master Suite Sanctuary', category: 'Suites', src: 'images/interior-2.jpg' },
+                    { id: 'int-3', title: 'Gourmet Marble Kitchen', category: 'Kitchen', src: 'images/interior-3.jpg' },
+                    { id: 'int-4', title: 'Artisanal Reading Lounge', category: 'Living', src: 'images/interior-4.jpg' },
+                    { id: 'int-5', title: 'Warm Minimalist Dining Room', category: 'Dining', src: 'images/interior-5.jpg' },
+                    { id: 'int-6', title: 'Penthouse Custom Library', category: 'Living', src: 'images/interior-6.jpg' },
+                    { id: 'int-7', title: 'Freestanding Marble Spa Bath', category: 'Bath', src: 'images/interior-7.jpg' },
+                    { id: 'int-8', title: 'Sunset Glow Master Bedroom', category: 'Suites', src: 'images/interior-8.jpg' },
+                    { id: 'int-9', title: 'Executive Penthouse Study', category: 'Living', src: 'images/interior-9.jpg' },
+                    { id: 'int-10', title: 'Sunlit Chef Kitchen Island', category: 'Kitchen', src: 'images/interior-10.jpg' }
+                ]
+            },
+            'construction': {
+                id: 'construction',
+                icon: '🏗️',
+                title: 'Construction & Execution',
+                subtitle: 'Executing master craftsmanship with uncompromising precision, premium materials, and safety.',
+                badge: '✦ Master Build',
+                heroImg: 'images/construction-hero.jpg',
+                heading: 'Built to Last Generations with Master Craftsmanship',
+                p1: 'Visionary design is only as extraordinary as its real-world execution. Our in-house general contracting and construction team bridges architectural blueprints and tangible reality with rigorous precision. By harmonizing design and engineering under one roof, we eliminate delays, manage costs, and protect artistic integrity.',
+                p2: 'We deploy master builders, stone masons, structural engineers, and artisans who specialize in elite residential and commercial construction. From complex seismic-grade foundations to the immaculate polish of book-matched marble, our relentless quality controls ensure flawless delivery.',
+                stats: [
+                    { num: '200+', lbl: 'Structures Built' },
+                    { num: '0', lbl: 'Safety Incidents' },
+                    { num: '15 Yrs', lbl: 'Structural Warranty' }
+                ],
+                features: [
+                    'End-to-end general contracting & supervision',
+                    'Rigorous on-site engineering management',
+                    'Master carpentry & architectural masonry',
+                    'Multi-stage quality assurance protocols',
+                    'Transparent budget tracking & milestone scheduling',
+                    'Post-handover warranty & structural support'
+                ],
+                categories: ['All', 'Structural', 'Craftsmanship', 'Finishing', 'Site Work', 'Management'],
+                defaultPhotos: [
+                    { id: 'const-1', title: 'Structural Foundation & Framework', category: 'Structural', src: 'images/construction-1.jpg' },
+                    { id: 'const-2', title: 'On-Site Engineering Oversight', category: 'Management', src: 'images/construction-2.jpg' },
+                    { id: 'const-3', title: 'Blueprint & On-Site Execution', category: 'Structural', src: 'images/construction-3.jpg' },
+                    { id: 'const-4', title: 'Precision Carpentry & Framing', category: 'Craftsmanship', src: 'images/construction-4.jpg' },
+                    { id: 'const-5', title: 'Interior Architectural Buildout', category: 'Finishing', src: 'images/construction-5.jpg' },
+                    { id: 'const-6', title: 'Luxury Surface & Tile Installation', category: 'Finishing', src: 'images/construction-6.jpg' },
+                    { id: 'const-7', title: 'Heavy Duty Structural Scaffolding', category: 'Structural', src: 'images/construction-7.jpg' },
+                    { id: 'const-8', title: 'Reinforced Concrete Foundation Pour', category: 'Structural', src: 'images/construction-8.jpg' },
+                    { id: 'const-9', title: 'Precision Electrical & Automation Grid', category: 'Craftsmanship', src: 'images/construction-9.jpg' },
+                    { id: 'const-10', title: 'Excavation & Earthwork Preparation', category: 'Site Work', src: 'images/construction-10.jpg' }
+                ]
+            }
+        };
+
+        // ─── STATE ───
+        let currentServiceId = 'architecture';
+        let currentCategoryFilter = 'All';
+        let currentActiveGallery = [];
+        let currentLightboxIndex = 0;
+
+        // ─── RENDER SERVICE PAGE ───
+        function renderService(serviceId) {
+            if (!servicesData[serviceId]) serviceId = 'architecture';
+            currentServiceId = serviceId;
+            const data = servicesData[serviceId];
+
+            // Update Page Title
+            document.title = `Dreamspace | ${data.title}`;
+
+            // Update Subnav Active State
+            document.querySelectorAll('.subnav-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.getAttribute('data-service') === serviceId);
+            });
+
+            // Update Hero Elements
+            const heroImg = document.getElementById('service-hero');
+            heroImg.style.opacity = '0';
+            setTimeout(() => {
+                heroImg.src = data.heroImg;
+                heroImg.style.opacity = '1';
+            }, 150);
+
+            document.getElementById('breadcrumb-current').textContent = data.title;
+            document.getElementById('service-badge').textContent = data.badge;
+            document.getElementById('service-title').textContent = data.title;
+            document.getElementById('service-subtitle').textContent = data.subtitle;
+
+            // Update Overview Text
+            document.getElementById('service-heading').textContent = data.heading;
+            document.getElementById('service-p1').textContent = data.p1;
+            document.getElementById('service-p2').textContent = data.p2;
+
+            // Render Stats
+            const statsBar = document.getElementById('service-stats-bar');
+            statsBar.innerHTML = '';
+            data.stats.forEach(st => {
+                const box = document.createElement('div');
+                box.className = 'detail-stat-box';
+                box.innerHTML = `<div class="num">${st.num}</div><div class="lbl">${st.lbl}</div>`;
+                statsBar.appendChild(box);
+            });
+
+            // Render What's Included
+            const featList = document.getElementById('service-features');
+            featList.innerHTML = '';
+            data.features.forEach(f => {
+                const li = document.createElement('li');
+                li.innerHTML = `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>${f}</span>`;
+                featList.appendChild(li);
+            });
+
+            // Render Other Services Links in Sidebar
+            const otherContainer = document.getElementById('sidebar-other-services');
+            otherContainer.innerHTML = '';
+            Object.keys(servicesData).forEach(id => {
+                if (id !== serviceId) {
+                    const item = servicesData[id];
+                    const a = document.createElement('a');
+                    a.href = `?id=${id}`;
+                    a.className = 'sidebar-link-pill';
+                    a.innerHTML = `<span>${item.icon} ${item.title}</span> <span>&rarr;</span>`;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        history.pushState(null, '', `?id=${id}`);
+                        renderService(id);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                    otherContainer.appendChild(a);
+                }
+            });
+
+            // Reset Filter and Populate Gallery
+            currentCategoryFilter = 'All';
+            renderGalleryFilters(data.categories);
+            renderGallery();
+        }
+
+        // ─── RENDER CATEGORY FILTERS ───
+        function renderGalleryFilters(categories) {
+            const filterBar = document.getElementById('gallery-filter-bar');
+            filterBar.innerHTML = '';
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `gallery-filter-btn ${cat === currentCategoryFilter ? 'active' : ''}`;
+                btn.textContent = cat;
+                btn.addEventListener('click', () => {
+                    currentCategoryFilter = cat;
+                    document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderGallery();
+                });
+                filterBar.appendChild(btn);
+            });
+        }
+
+        // ─── RENDER GALLERY GRID ───
+        function renderGallery() {
+            const data = servicesData[currentServiceId];
+            const allPhotos = data.defaultPhotos;
+
+            // Filter
+            const filtered = currentCategoryFilter === 'All'
+                ? allPhotos
+                : allPhotos.filter(p => p.category.toLowerCase() === currentCategoryFilter.toLowerCase());
+
+            currentActiveGallery = filtered;
+
+            // Badges
+            document.getElementById('gallery-count-badge').textContent = `${allPhotos.length} Photos`;
+            document.getElementById('hero-photo-count').textContent = allPhotos.length;
+
+            const grid = document.getElementById('service-gallery');
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="gallery-empty-state">
+                        <p>No photos found under "<strong>${currentCategoryFilter}</strong>".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach((photo, idx) => {
+                const card = document.createElement('div');
+                card.className = 'gallery-card';
+
+                card.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.title}" loading="lazy" onerror="this.onerror=null; this.src='images/gallery-placeholder.jpg';">
+                    <div class="gallery-card-overlay">
+                        <span class="gallery-card-tag">${photo.category}</span>
+                        <h4 class="gallery-card-title">${photo.title}</h4>
+                    </div>
+                    <div class="gallery-card-actions">
+                        <button class="gallery-card-icon-btn view-btn" title="Expand Photo" aria-label="Expand Photo">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42 2.89 2.87L15 21h6z"/></svg>
+                        </button>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    openLightbox(idx);
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // ─── LIGHTBOX LOGIC ───
+        const lightbox = document.getElementById('lightbox-modal');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbTitle = document.getElementById('lightbox-title');
+        const lbCounter = document.getElementById('lightbox-counter');
+
+        function openLightbox(index) {
+            if (!currentActiveGallery || currentActiveGallery.length === 0) return;
+            currentLightboxIndex = index;
+            updateLightboxView();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxView() {
+            const photo = currentActiveGallery[currentLightboxIndex];
+            if (!photo) return;
+            lbImg.src = photo.src;
+            lbTitle.textContent = photo.title;
+            lbCounter.textContent = `Photo ${currentLightboxIndex + 1} of ${currentActiveGallery.length} • ${photo.category}`;
+        }
+
+        function prevLightbox() {
+            if (currentLightboxIndex > 0) {
+                currentLightboxIndex--;
+            } else {
+                currentLightboxIndex = currentActiveGallery.length - 1;
+            }
+            updateLightboxView();
+        }
+
+        function nextLightbox() {
+            if (currentLightboxIndex < currentActiveGallery.length - 1) {
+                currentLightboxIndex++;
+            } else {
+                currentLightboxIndex = 0;
+            }
+            updateLightboxView();
+        }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-prev').addEventListener('click', prevLightbox);
+        document.getElementById('lightbox-next').addEventListener('click', nextLightbox);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevLightbox();
+                if (e.key === 'ArrowRight') nextLightbox();
+            }
+        });
+
+        // ─── SERVICE SUBNAV CLICK LISTENERS ───
+        document.querySelectorAll('.subnav-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const serviceId = tab.getAttribute('data-service');
+                history.pushState(null, '', `?id=${serviceId}`);
+                renderService(serviceId);
+            });
+        });
+
+        // ─── INITIALIZATION ───
+        function init() {
+            const params = new URLSearchParams(window.location.search);
+            const initialId = params.get('id') || 'architecture';
+            renderService(initialId);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        window.addEventListener('popstate', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || 'architecture';
+            renderService(id);
+        });
+    </script>
+    <script src="js/auth-nav.js"></script>
+</body>
+</html>

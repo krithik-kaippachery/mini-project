@@ -1,0 +1,16 @@
+{
+  "name": "Dreamspace Interior Design",
+  "short_name": "Dreamspace",
+  "description": "Professional interior design and home decor solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c3e50",
+"icons": [
+  {
+    "src": "icon.jpg",
+    "sizes": "192x192",
+    "type": "image/jpeg"
+  }
+]
+}

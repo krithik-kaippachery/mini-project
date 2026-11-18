@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Services & Estimation</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        body { 
+            background: linear-gradient(rgba(26,26,26,0.9), rgba(26,26,26,0.9)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80') center/cover fixed; 
+        }
+        
+        /* Premium Interactive Room Cards */
+        .room-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .room-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .room-card:hover {
+            border-color: rgba(212, 175, 55, 0.5); /* Faded Gold */
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .room-card.active {
+            border-color: #d4af37; /* Solid Gold */
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .room-card .icon { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+        .room-card h4 { color: #fff; font-size: 1.1rem; margin-bottom: 4px; font-weight: 600; letter-spacing: 1px; }
+        .room-card p { color: #d4af37; font-size: 0.9rem; margin: 0; }
+        
+        /* Custom Slider Styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            border: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #d4af37;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+    <div class="logo">DREAMSPACE</div>
+    <div class="links">
+        <a href="/home.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/services.html" class="active">Services</a>
+        <a href="/index.html">Logout</a>
+    </div>
+</nav>
+    <main style="padding-top: 12vh; text-align: center; padding-bottom: 50px;">
+        <h2 style="color: var(--gold); font-size: 3rem; margin-bottom: 1rem;">Instant Project Estimator</h2>
+        
+        <div class="glass-panel" style="margin-top: 2vh;">
+            <div class="form-group">
+                <label>Select Room Profile</label>
+                <!-- New Interactive Grid -->
+                <div class="room-selector">
+                    <div class="room-card active" data-price="15000">
+                        <span class="icon">🛋️</span>
+                        <h4>Living Room</h4>
+                        <p>₹15,000 Base</p>
+                    </div>
+                    <div class="room-card" data-price="25000">
+                        <span class="icon">🍳</span>
+                        <h4>Full Kitchen</h4>
+                        <p>₹25,000 Base</p>
+                    </div>
+                    <div class="room-card" data-price="12000">
+                        <span class="icon">🛏️</span>
+                        <h4>Master Bedroom</h4>
+                        <p>₹12,000 Base</p>
+                    </div>
+                    <div class="room-card" data-price="45000">
+                        <span class="icon">🏡</span>
+                        <h4>Complete Home</h4>
+                        <p>₹45,000 Base</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 2rem;">
+                <label for="sqft">Space Dimensions: <span id="sqft-val" style="color: #fff; font-size: 1.2rem;">500</span> Sq. Ft.</label>
+                <input type="range" id="sqft" min="100" max="2000" value="500" step="50" style="margin-top: 10px;">
+            </div>
+
+            <div class="price-display">
+                Estimated Cost: <span id="final-price">₹0</span>
+            </div>
+
+            <button class="btn" id="book-now" style="width: 100%; font-size: 1.1rem;">Request Formal Quote</button>
+            <p id="feedback" style="color: #4CAF50; margin-top: 15px; display: none; font-weight: bold; font-size: 1.1rem;"></p>
+        </div>
+    </main>
+    
+    <!-- We load app.js for the Service Worker, but override the calculator logic here -->
+    <script src="/app.js"></script>
+    <script>
+        const cards = document.querySelectorAll('.room-card');
+        const slider = document.getElementById('sqft');
+        const valDisplay = document.getElementById('sqft-val');
+        const priceDisplay = document.getElementById('final-price');
+        const submitBtn = document.getElementById('book-now');
+        const msg = document.getElementById('feedback');
+
+        let currentBasePrice = 15000; // Default matches the active card
+
+        function updateMath() {
+            const sqft = parseInt(slider.value);
+            const multiplier = 45; // ₹45 per sq.ft styling fee
+            const total = currentBasePrice + (sqft * multiplier);
+            priceDisplay.textContent = '₹' + total.toLocaleString('en-IN');
+        }
+
+        // Handle Card Clicks
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove active class from all
+                cards.forEach(c => c.classList.remove('active'));
+                // Add to clicked card
+                card.classList.add('active');
+                // Update base price and recalculate
+                currentBasePrice = parseInt(card.getAttribute('data-price'));
+                updateMath();
+            });
+        });
+
+        // Handle Slider Movement
+        slider.addEventListener('input', (e) => {
+            valDisplay.textContent = e.target.value;
+            updateMath();
+        });
+
+        // Handle Button Click
+        submitBtn.addEventListener('click', () => {
+            submitBtn.style.display = 'none';
+            msg.style.display = 'block';
+            msg.textContent = '✓ Quote Request Sent! Our design team will contact you shortly.';
+        });
+
+        // Run calculation instantly on load
+        updateMath();
+    </script>
+</body>
+</html>

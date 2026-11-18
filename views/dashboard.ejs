@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('partials/navbar', { user, page: 'dashboard' }) %>
+
+    <main class="main-content">
+        <div class="page-header fade-up">
+            <div class="greeting">Welcome back</div>
+            <h1><%= user.name.split(' ')[0] %>'s Studio</h1>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card fade-up" style="animation-delay:0.1s">
+                <div class="metric-label">Total Spend</div>
+                <div class="metric-value green">₹<%= metrics.totalSpend.toLocaleString('en-IN') %></div>
+                <div class="metric-sub">Across <%= metrics.projectsCount %> projects</div>
+            </div>
+            <div class="metric-card fade-up" style="animation-delay:0.2s">
+                <div class="metric-label">Approved</div>
+                <div class="metric-value primary"><%= metrics.approvedCount %></div>
+                <div class="metric-sub">Ready to proceed</div>
+            </div>
+            <div class="metric-card fade-up" style="animation-delay:0.3s">
+                <div class="metric-label">Pending</div>
+                <div class="metric-value"><%= metrics.pendingCount %></div>
+                <div class="metric-sub">Awaiting review</div>
+            </div>
+        </div>
+
+        <div class="clean-panel fade-up" style="animation-delay:0.4s">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+                <h2 style="font-family:'Playfair Display', serif; font-size:1.8rem; margin:0;">Saved Estimates</h2>
+                <a href="/services" class="btn btn-primary">New Estimate</a>
+            </div>
+            
+            <% if (estimates.length > 0) { %>
+            <table class="estimates-table">
+                <thead>
+                    <tr>
+                        <th>Room Type</th>
+                        <th>Sq. Ft.</th>
+                        <th>Total Cost</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% estimates.forEach(est => { %>
+                    <tr>
+                        <td style="font-weight:500"><%= est.room %></td>
+                        <td style="color:var(--text-secondary)"><%= est.sqft %> ft²</td>
+                        <td style="color:var(--text-primary); font-weight:600;">₹<%= est.total.toLocaleString('en-IN') %></td>
+                        <td style="color:var(--text-muted);"><%= est.date %></td>
+                        <td>
+                            <span class="status-badge status-<%= est.status.toLowerCase() %>">
+                                <%= est.status %>
+                            </span>
+                        </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <div style="text-align:center; padding:60px 0; color:var(--text-muted);">
+                    <p>No estimates yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+</body>
+</html>

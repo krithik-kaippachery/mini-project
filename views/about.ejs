@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Portfolio</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('partials/navbar', { user, page: 'about' }) %>
+
+    <main class="main-content">
+        <div class="page-header fade-up">
+            <div class="greeting">Est. 2019 · Mumbai, India</div>
+            <h1>Design Portfolio</h1>
+        </div>
+
+        <div class="clean-panel fade-up" style="margin-bottom:48px; max-width:800px; margin-left:auto; margin-right:auto; text-align:center;">
+            <h2 style="font-size:2rem; margin-bottom:24px;">Our Story</h2>
+            <p style="color:var(--text-secondary); line-height:1.8; font-size:1.05rem;">
+                Founded with a passion for aesthetics and functionality, <strong>Dreamspace</strong> transforms
+                houses into curated homes. We believe that every room has a story waiting to be told
+                through careful curation of colors, textures, and furniture — blending the timeless
+                with the contemporary.
+            </p>
+        </div>
+
+        <div class="fade-up" style="animation-delay:0.1s;">
+            <div style="text-align:center; margin-bottom:32px;">
+                <h2 style="font-size:2rem; margin-bottom:24px;">Recent Projects</h2>
+                <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="filter-all">All Styles</button>
+                    <button class="btn btn-surface" style="background:var(--bg-surface); border:1px solid var(--border-color); color:var(--text-primary);" id="filter-modern">Modern Minimalist</button>
+                    <button class="btn btn-surface" style="background:var(--bg-surface); border:1px solid var(--border-color); color:var(--text-primary);" id="filter-luxury">Classic Luxury</button>
+                    <button class="btn btn-surface" style="background:var(--bg-surface); border:1px solid var(--border-color); color:var(--text-primary);" id="filter-scandinavian">Scandinavian</button>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(350px, 1fr)); gap:24px;" id="gallery">
+                <div class="gallery-card fade-in" data-cat="modern" style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" alt="Modern Living Room" style="width:100%; height:300px; object-fit:cover; display:block;">
+                </div>
+                <div class="gallery-card fade-in" data-cat="modern" style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+                    <img src="https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&w=600&q=80" alt="Minimalist Study" style="width:100%; height:300px; object-fit:cover; display:block;">
+                </div>
+                <div class="gallery-card fade-in" data-cat="luxury" style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" alt="Classic Dining Room" style="width:100%; height:300px; object-fit:cover; display:block;">
+                </div>
+                <div class="gallery-card fade-in" data-cat="luxury" style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80" alt="Luxury Master Bedroom" style="width:100%; height:300px; object-fit:cover; display:block;">
+                </div>
+                <div class="gallery-card fade-in" data-cat="scandinavian" style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+                    <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=600&q=80" alt="Scandinavian Kitchen" style="width:100%; height:300px; object-fit:cover; display:block;">
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

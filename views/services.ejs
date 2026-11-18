@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Project Estimator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('partials/navbar', { user, page: 'services' }) %>
+
+    <main class="main-content">
+        <div class="page-header fade-up">
+            <div class="greeting">Powered by live pricing</div>
+            <h1>Instant Estimator</h1>
+        </div>
+
+        <div class="estimator-layout">
+            <!-- Left: Configuration -->
+            <div>
+                <div class="clean-panel fade-up" style="margin-bottom:24px;">
+                    <div class="panel-title" style="font-size:1.4rem;">Select Room Profile</div>
+                    <div class="room-grid" id="room-grid">
+                        <% roomPricing.forEach((room, i) => { %>
+                        <div class="room-card <%= i === 0 ? 'active' : '' %>"
+                             data-id="<%= room.id %>"
+                             data-base="<%= room.basePrice %>"
+                             data-rate="<%= room.ratePerSqft %>">
+                            <span class="room-icon"><%= room.icon %></span>
+                            <h4><%= room.name %></h4>
+                            <div class="room-base">₹<%= room.basePrice.toLocaleString('en-IN') %> base</div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+
+                <div class="clean-panel fade-up" style="animation-delay:0.1s; margin-bottom:24px;">
+                    <div class="panel-title" style="font-size:1.4rem;">Space Dimensions</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                        <span style="color:var(--text-muted)">Area</span>
+                        <span style="font-weight:600;"><span id="sqft-display">500</span> Sq. Ft.</span>
+                    </div>
+                    <input type="range" id="sqft-slider" min="100" max="3000" value="500" step="50">
+                    <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.8rem; color:var(--text-muted);">
+                        <span>100 ft²</span>
+                        <span>3,000 ft²</span>
+                    </div>
+                </div>
+
+                <div class="clean-panel fade-up" style="animation-delay:0.15s;">
+                    <div class="panel-title" style="font-size:1.4rem;">Pricing Breakdown</div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div style="padding:20px; background:var(--bg-base); border-radius:12px; border:1px solid var(--border-color);">
+                            <div style="color:var(--text-muted); font-size:0.8rem; margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">Base Price</div>
+                            <div style="font-weight:600; color:var(--text-primary); font-size:1.2rem;" id="base-price-display">₹15,000</div>
+                        </div>
+                        <div style="padding:20px; background:var(--bg-base); border-radius:12px; border:1px solid var(--border-color);">
+                            <div style="color:var(--text-muted); font-size:0.8rem; margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">Per Sq. Ft.</div>
+                            <div style="font-weight:600; color:var(--text-primary); font-size:1.2rem;" id="rate-display">₹45</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Result Card -->
+            <div>
+                <div class="price-result-card fade-up" style="animation-delay:0.2s;">
+                    <div class="price-label">Estimated Cost</div>
+                    <div class="price-amount" id="total-price">₹37,500</div>
+                    <div class="price-breakdown" id="price-breakdown">₹15,000 base + 500ft² × ₹45</div>
+
+                    <div style="border-top:1px solid rgba(255,255,255,0.2); padding-top:24px; margin-bottom:32px; text-align:left;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                            <span style="color:rgba(255,255,255,0.8)">Room</span>
+                            <span id="summary-room" style="font-weight:600;">Living Room</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                            <span style="color:rgba(255,255,255,0.8)">Area</span>
+                            <span id="summary-sqft" style="font-weight:600;">500 ft²</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span style="color:rgba(255,255,255,0.8)">Timeline</span>
+                            <span style="font-weight:600;" id="summary-timeline">4–6 weeks</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-surface btn-full" id="quote-btn" style="background:#fff; color:var(--primary); font-weight:600; padding:16px;">
+                        Request Formal Quote
+                    </button>
+                    <div id="quote-feedback" style="margin-top:16px; font-weight:500; display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/calculator.js"></script>
+    <script>
+        // Slightly tweak the quote button feedback logic for the new design
+        const qBtn = document.getElementById('quote-btn');
+        const qFb = document.getElementById('quote-feedback');
+        if(qBtn && qFb) {
+            qBtn.addEventListener('click', () => {
+                qBtn.style.display = 'none';
+                qFb.style.display = 'block';
+                qFb.textContent = '✓ Request Sent! We will contact you soon.';
+            });
+        }
+    </script>
+</body>
+</html>

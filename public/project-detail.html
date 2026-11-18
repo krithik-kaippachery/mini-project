@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | Project Detail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <span>Dreamspace</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="service-detail.html">Services</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="index.html">Login</a></li>
+        </ul>
+        <a href="contact.html" class="btn-contact">Get a Quote</a>
+    </nav>
+
+    <!-- Project Hero -->
+    <div class="project-hero" id="project-hero">
+        <video id="hero-video" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <div class="project-hero-content">
+            <span class="tag" id="hero-tag"></span>
+            <h1 id="hero-title"></h1>
+        </div>
+    </div>
+
+    <!-- Project Stats -->
+    <div class="project-stats reveal">
+        <div class="project-stat">
+            <div class="value" id="stat-area"></div>
+            <div class="label">Total Area</div>
+        </div>
+        <div class="project-stat">
+            <div class="value" id="stat-duration"></div>
+            <div class="label">Duration</div>
+        </div>
+        <div class="project-stat">
+            <div class="value" id="stat-budget"></div>
+            <div class="label">Budget</div>
+        </div>
+        <div class="project-stat">
+            <div class="value" id="stat-year"></div>
+            <div class="label">Completed</div>
+        </div>
+    </div>
+
+    <!-- Detail Body -->
+    <div class="detail-body">
+        <div class="detail-text reveal-left">
+            <h2 id="detail-heading"></h2>
+            <p id="detail-p1"></p>
+            <p id="detail-p2"></p>
+
+            <div class="detail-gallery" id="detail-gallery"></div>
+        </div>
+
+        <div class="detail-sidebar reveal-right">
+            <h3>Project Highlights</h3>
+            <ul id="highlights-list"></ul>
+
+            <div style="margin-top:30px;">
+                <a href="contact.html" class="btn-submit" style="display:block; text-align:center;">Start Your Project</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projects = {
+            'azure-villa': {
+                title: 'The Azure Villa',
+                tag: 'Residential Architecture',
+                heroVideo: 'images/azure-villa-video.mp4',
+                area: '4,200 ft²', duration: '14 Months', budget: '$2.1M', year: '2024',
+                heading: 'A Coastal Masterpiece',
+                p1: 'The Azure Villa is a stunning beachfront residence that seamlessly blends contemporary architecture with Mediterranean charm. Floor-to-ceiling windows frame panoramic ocean views, while the interior features custom Italian marble, hand-selected teak wood accents, and a state-of-the-art smart home system.',
+                p2: 'Our team worked closely with the homeowners over 14 months to create a space that captures the essence of coastal luxury. From the infinity pool that appears to merge with the horizon to the rooftop terrace designed for sunset entertaining, every detail was crafted with precision and passion.',
+                highlights: ['Custom Italian marble flooring', 'Floor-to-ceiling ocean-view windows', 'Infinity pool with horizon edge', 'Smart home automation system', 'Rooftop entertaining terrace', 'Sustainable bamboo insulation'],
+                gallery: [
+                    'images/project-1.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            },
+            'beverly-estate': {
+                title: 'Beverly Hills Estate',
+                tag: 'Luxury Interior Design',
+                heroVideo: 'images/beverly-estate-video.mp4',
+                area: '8,500 ft²', duration: '18 Months', budget: '$5.8M', year: '2023',
+                heading: 'Where Opulence Meets Elegance',
+                p1: 'This iconic Beverly Hills estate underwent a complete interior transformation. We reimagined every room to reflect Hollywood-caliber glamour while maintaining warmth and livability. The grand foyer features a custom chandelier with 2,400 hand-cut crystals, setting the tone for the entire residence.',
+                p2: 'The entertainment wing includes a 12-seat private cinema with acoustic engineering by world-renowned consultants, a wine cellar housing 3,000 bottles, and a spa-inspired master bathroom with heated onyx floors and a soaking tub carved from a single block of Carrara marble.',
+                highlights: ['Custom 2,400-crystal chandelier', '12-seat private cinema', '3,000-bottle wine cellar', 'Heated onyx bathroom floors', 'Carrara marble soaking tub', 'Motorized glass wall system'],
+                gallery: [
+                    'images/project-2.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            },
+            'minimalist-haven': {
+                title: 'Minimalist Haven',
+                tag: 'Complete Renovation',
+                heroVideo: 'images/minimalist-haven-video.mp4',
+                area: '2,800 ft²', duration: '8 Months', budget: '$780K', year: '2024',
+                heading: 'Less is More, Perfected',
+                p1: 'This complete renovation transformed a dated 1970s suburban home into a minimalist sanctuary. We stripped the interior down to its bones and rebuilt it with clean lines, natural materials, and an abundance of natural light. The open-plan living area flows seamlessly into a landscaped courtyard garden.',
+                p2: 'Every material was chosen for both beauty and sustainability — reclaimed oak beams, recycled steel framing, and zero-VOC finishes throughout. The result is a home that feels expansive despite its modest footprint, proving that thoughtful design always trumps square footage.',
+                highlights: ['Complete structural renovation', 'Open-plan living design', 'Reclaimed oak ceiling beams', 'Zero-VOC sustainable finishes', 'Courtyard garden integration', 'Underfloor heating throughout'],
+                gallery: [
+                    'images/project-3.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            },
+            'glass-house': {
+                title: 'The Glass House',
+                tag: 'Architectural Design',
+                heroVideo: 'images/glass-house-video.mp4',
+                area: '3,600 ft²', duration: '12 Months', budget: '$1.5M', year: '2023',
+                heading: 'Transparency Redefined',
+                p1: 'The Glass House is a bold architectural statement that challenges conventional notions of privacy and space. Using triple-glazed, electrochromic glass panels that can switch from transparent to opaque at the touch of a button, we created a home that is simultaneously open and intimate.',
+                p2: 'The structural engineering alone was a marvel — cantilevered floors supported by hidden steel cores allow the glass walls to remain completely free of visible supports. At night, the house glows like a lantern in the landscape, becoming a living sculpture.',
+                highlights: ['Electrochromic smart glass walls', 'Cantilevered structural floors', 'Hidden steel core supports', 'Triple-glazed insulation', 'Landscape-integrated design', 'Automated climate control'],
+                gallery: [
+                    'images/project-1.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            },
+            'downtown-penthouse': {
+                title: 'Downtown Penthouse',
+                tag: 'Interior Styling',
+                heroVideo: 'images/downtown-penthouse-video.mp4',
+                area: '3,200 ft²', duration: '6 Months', budget: '$1.2M', year: '2024',
+                heading: 'Urban Living, Elevated',
+                p1: 'Perched on the 42nd floor of a landmark skyscraper, this penthouse demanded an interior that could compete with the breathtaking city skyline visible from every room. We designed a moody, sophisticated palette of deep navy, brushed brass, and smoky oak that feels both dramatic and inviting.',
+                p2: 'The centerpiece is a custom floating staircase connecting the two levels, constructed from blackened steel and glass with integrated LED lighting that changes color based on the time of day. The kitchen features a 14-foot waterfall island topped with rare Calacatta Viola marble.',
+                highlights: ['42nd floor panoramic views', 'Floating LED staircase', '14-foot marble kitchen island', 'Brushed brass custom fixtures', 'Motorized blackout blinds', 'Dual-zone wine storage'],
+                gallery: [
+                    'images/project-2.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            },
+            'nordic-kitchen': {
+                title: 'Nordic Kitchen',
+                tag: 'Commercial Space',
+                heroVideo: 'images/nordic-kitchen-video.mp4',
+                area: '1,800 ft²', duration: '4 Months', budget: '$420K', year: '2024',
+                heading: 'Scandinavian Precision',
+                p1: 'This commercial kitchen project for an upscale Nordic-fusion restaurant required a design that was both stunningly beautiful for an open-kitchen concept and brutally functional for a high-volume service. We achieved this by using commercial-grade stainless steel paired with warm birch wood panels and living herb walls.',
+                p2: 'The ventilation system is hidden within custom ceiling sculptures, and the lighting shifts from bright task-lighting during prep to warm ambient tones during dinner service. The result is a kitchen that guests can watch like theater — clean, precise, and mesmerizing.',
+                highlights: ['Open-kitchen restaurant design', 'Living herb wall installation', 'Hidden ventilation sculptures', 'Adaptive lighting system', 'Commercial-grade equipment', 'Birch wood acoustic panels'],
+                gallery: [
+                    'images/project-3.jpg',
+                    'images/slider-design.jpg',
+                    'images/slider-delivered.jpg'
+                ]
+            }
+        };
+
+        // Load data from URL parameter
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') || 'azure-villa';
+        const p = projects[id] || projects['azure-villa'];
+
+        document.title = `Dreamspace | ${p.title}`;
+        document.getElementById('hero-video').src = p.heroVideo;
+        document.getElementById('hero-tag').textContent = p.tag;
+        document.getElementById('hero-title').textContent = p.title;
+        document.getElementById('stat-area').textContent = p.area;
+        document.getElementById('stat-duration').textContent = p.duration;
+        document.getElementById('stat-budget').textContent = p.budget;
+        document.getElementById('stat-year').textContent = p.year;
+        document.getElementById('detail-heading').textContent = p.heading;
+        document.getElementById('detail-p1').textContent = p.p1;
+        document.getElementById('detail-p2').textContent = p.p2;
+
+        // Highlights
+        const hlList = document.getElementById('highlights-list');
+        p.highlights.forEach(h => {
+            const li = document.createElement('li');
+            li.innerHTML = `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> ${h}`;
+            hlList.appendChild(li);
+        });
+
+        // Gallery
+        const gallery = document.getElementById('detail-gallery');
+        p.gallery.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Project Gallery';
+            gallery.appendChild(img);
+        });
+
+        // Scroll Reveal
+        function reveal() {
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+    <script src="js/auth-nav.js"></script>
+</body>
+</html>

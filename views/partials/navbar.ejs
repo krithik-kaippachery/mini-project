@@ -1,0 +1,17 @@
+<%# views/partials/navbar.ejs — Reusable top navigation for the new light minimalist theme %>
+<nav class="navbar">
+    <div class="nav-brand">DREAMSPACE</div>
+    
+    <div class="nav-links">
+        <a href="/dashboard" class="nav-link <%= page === 'dashboard' ? 'active' : '' %>">Dashboard</a>
+        <a href="/services" class="nav-link <%= page === 'services' ? 'active' : '' %>">Estimator</a>
+        <a href="/about" class="nav-link <%= page === 'about' ? 'active' : '' %>">Portfolio</a>
+    </div>
+
+    <div class="nav-user">
+        <div class="user-avatar"><%= user.name.charAt(0).toUpperCase() %></div>
+        <form action="/logout" method="POST" style="margin: 0;">
+            <button type="submit" class="logout-btn">Log out</button>
+        </form>
+    </div>
+</nav>

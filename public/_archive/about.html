@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | About Us</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Specific background for About page */
+        body { 
+            background: linear-gradient(rgba(26,26,26,0.92), rgba(26,26,26,0.92)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1920&q=80') center/cover fixed; 
+        }
+        
+        /* FIX: This padding pushes the content down below the navigation bar */
+        .about-container {
+            padding-top: 15vh; 
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        /* Styles for the new Interactive Portfolio */
+        .portfolio-filters { margin: 2rem 0; }
+        .filter-btn {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--gold);
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 4px;
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--gold); color: #000; }
+        
+        .gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .gallery-item {
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--glass-border);
+            transition: opacity 0.4s ease, transform 0.3s ease;
+        }
+        .gallery-item:hover { transform: scale(1.05); border-color: var(--gold); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <nav>
+    <div class="logo">DREAMSPACE</div>
+    <div class="links">
+        <a href="/home.html">Home</a>
+        <a href="/about.html" class="active">About</a>
+        <a href="/services.html">Services</a>
+        <a href="/index.html">Logout</a>
+    </div>
+</nav>
+    <main class="about-container">
+        <!-- The Fixed Story Section -->
+        <div class="glass-panel" style="margin-top: 2vh; margin-bottom: 4rem;">
+            <h2 style="color: var(--gold); font-size: 2.5rem; margin-bottom: 1rem;">Our Story</h2>
+            <p>Founded with a passion for aesthetics and functionality, Dreamspace aims to transform houses into homes. We believe that every room has a story waiting to be told through careful curation of colors, textures, and furniture.</p>
+        </div>
+
+        <!-- NEW FUNCTION: Interactive Dynamic Gallery -->
+        <h3 style="color: var(--gold); font-size: 2rem;">Design Portfolio</h3>
+        <p style="margin-bottom: 1rem;">Click the categories to filter our recent projects.</p>
+        
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Styles</button>
+            <button class="filter-btn" data-filter="modern">Modern Minimalist</button>
+            <button class="filter-btn" data-filter="luxury">Classic Luxury</button>
+        </div>
+
+        <div class="gallery">
+            <!-- Modern Images -->
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=500&q=80" class="gallery-item modern" alt="Modern Room">
+            <img src="https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&w=500&q=80" class="gallery-item modern" alt="Modern Living">
+            <!-- Luxury Images -->
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=500&q=80" class="gallery-item luxury" alt="Luxury Interior">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80" class="gallery-item luxury" alt="Luxury Bedroom">
+        </div>
+    </main>
+
+    <script src="/app.js"></script>
+    <script>
+        // JavaScript logic for the Portfolio Filter function
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Highlight the clicked button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter the images based on the button's data attribute
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.classList.remove('hidden');
+                        // Small trick to re-trigger CSS animation
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.opacity = '1', 50);
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamspace | About Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <span>Dreamspace</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="service-detail.html">Services</a></li>
+            <li><a href="about.html" class="active">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="index.html">Login</a></li>
+        </ul>
+        <a href="contact.html" class="btn-contact">Get a Quote</a>
+    </nav>
+
+    <section class="about-hero">
+        <div class="about-text reveal-left">
+            <h1 style="line-height: 1.1;">Crafting Timeless <br><span>Spaces</span> Since 1994</h1>
+            <p style="margin-top:20px;">At Dreamspace, we believe that interior design is more than just arranging furniture. It's about understanding the people who live in those spaces and translating their personalities into physical form.</p>
+            <p>Our team of visionary architects and meticulous interior designers work in absolute harmony to deliver projects that not only meet your expectations, but redefine them completely.</p>
+        </div>
+        <div class="about-img reveal-right">
+            <video autoplay muted loop playsinline style="width: 100%; display: block; border-radius: 16px;">
+                <source src="images/about-studio.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <style>
+        .philosophy-section {
+            position: relative;
+            background-color: #080808;
+            padding: 100px 5%;
+            overflow: hidden;
+        }
+
+        .philosophy-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1594902166699-28c11eebad81?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.65;
+            --x: -1000px;
+            --y: -1000px;
+            -webkit-mask-image: radial-gradient(circle 400px at var(--x) var(--y), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 400px at var(--x) var(--y), black 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .philosophy-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none; /* Let mouse events pass through to section */
+        }
+
+        .philosophy-grid {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            pointer-events: auto; /* Re-enable pointer events for hover */
+        }
+
+        .philosophy-card {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(25, 25, 25, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+
+        .philosophy-card h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .philosophy-card p {
+            color: #aaaaaa;
+            font-size: 1rem;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 25px rgba(243, 156, 18, 0.25);
+        }
+    </style>
+
+    <section class="philosophy-section" id="philosophy-section">
+        <div class="philosophy-overlay"></div>
+        
+        <div class="philosophy-content">
+            <h2 class="section-header reveal" style="color: #ffffff;">Our <span style="color: var(--primary);">Philosophy</span></h2>
+            <p class="section-subtitle reveal" style="color:#aaaaaa;">Illuminating raw textures and uncompromising design.</p>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card reveal">
+                    <h3>Uncompromising Luxury</h3>
+                    <p>Italian Calacatta Marble</p>
+                </div>
+                <div class="philosophy-card reveal" style="transition-delay: 0.1s;">
+                    <h3>Flawless Execution</h3>
+                    <p>Brushed Brass Detailing</p>
+                </div>
+                <div class="philosophy-card reveal" style="transition-delay: 0.2s;">
+                    <h3>Spatial Harmony</h3>
+                    <p>Sustainable Smoked Oak</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const philSection = document.getElementById('philosophy-section');
+            const philOverlay = document.querySelector('.philosophy-overlay');
+
+            if (philSection && philOverlay) {
+                philSection.addEventListener('mousemove', (e) => {
+                    const rect = philSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    philOverlay.style.setProperty('--x', `${x}px`);
+                    philOverlay.style.setProperty('--y', `${y}px`);
+                });
+
+                philSection.addEventListener('mouseleave', () => {
+                    philOverlay.style.setProperty('--x', `-1000px`);
+                    philOverlay.style.setProperty('--y', `-1000px`);
+                });
+            }
+        });
+    </script>
+
+    <script>
+        function reveal() {
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+    <script src="js/auth-nav.js"></script>
+</body>
+</html>
