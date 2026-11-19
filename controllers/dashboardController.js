@@ -43,6 +43,10 @@ exports.getDashboard = (req, res) => {
 // ─── GET /services (protected estimator page) ─────────────────────────────────
 exports.getServicesPage = (req, res) => {
     const user = UserStore.findById(req.user.id);
+    if (!user) {
+        res.clearCookie('token');
+        return res.redirect('/login');
+    }
     res.render('services', {
         user: UserStore.safeUser(user),
         roomPricing: ROOM_PRICING,
@@ -52,6 +56,10 @@ exports.getServicesPage = (req, res) => {
 // ─── GET /about (protected about page) ───────────────────────────────────────
 exports.getAboutPage = (req, res) => {
     const user = UserStore.findById(req.user.id);
+    if (!user) {
+        res.clearCookie('token');
+        return res.redirect('/login');
+    }
     res.render('about', { user: UserStore.safeUser(user) });
 };
 

@@ -127,7 +127,7 @@
             'glass-house': {
                 title: 'The Glass House',
                 tag: 'Architectural Design',
-                heroVideo: 'images/glass-house-video.mp4',
+                heroVideo: 'images/azure-villa-video.mp4',
                 area: '3,600 ft²', duration: '12 Months', budget: '$1.5M', year: '2023',
                 heading: 'Transparency Redefined',
                 p1: 'The Glass House is a bold architectural statement that challenges conventional notions of privacy and space. Using triple-glazed, electrochromic glass panels that can switch from transparent to opaque at the touch of a button, we created a home that is simultaneously open and intimate.',
@@ -142,7 +142,7 @@
             'downtown-penthouse': {
                 title: 'Downtown Penthouse',
                 tag: 'Interior Styling',
-                heroVideo: 'images/downtown-penthouse-video.mp4',
+                heroVideo: 'images/beverly-estate-video.mp4',
                 area: '3,200 ft²', duration: '6 Months', budget: '$1.2M', year: '2024',
                 heading: 'Urban Living, Elevated',
                 p1: 'Perched on the 42nd floor of a landmark skyscraper, this penthouse demanded an interior that could compete with the breathtaking city skyline visible from every room. We designed a moody, sophisticated palette of deep navy, brushed brass, and smoky oak that feels both dramatic and inviting.',
@@ -157,7 +157,7 @@
             'nordic-kitchen': {
                 title: 'Nordic Kitchen',
                 tag: 'Commercial Space',
-                heroVideo: 'images/nordic-kitchen-video.mp4',
+                heroVideo: 'images/minimalist-haven-video.mp4',
                 area: '1,800 ft²', duration: '4 Months', budget: '$420K', year: '2024',
                 heading: 'Scandinavian Precision',
                 p1: 'This commercial kitchen project for an upscale Nordic-fusion restaurant required a design that was both stunningly beautiful for an open-kitchen concept and brutally functional for a high-volume service. We achieved this by using commercial-grade stainless steel paired with warm birch wood panels and living herb walls.',
@@ -178,9 +178,15 @@
 
         document.title = `Dreamspace | ${p.title}`;
         const video = document.getElementById('hero-video');
-        video.src = p.heroVideo;
-        video.muted = true;
-        video.play().catch(() => {});
+        if (video) {
+            video.poster = (p.gallery && p.gallery[0]) ? p.gallery[0] : 'images/interior-hero.jpg';
+            video.onerror = () => {
+                video.poster = (p.gallery && p.gallery[0]) ? p.gallery[0] : 'images/interior-hero.jpg';
+            };
+            video.src = p.heroVideo;
+            video.muted = true;
+            video.play().catch(() => {});
+        }
         document.getElementById('hero-tag').textContent = p.tag;
         document.getElementById('hero-title').textContent = p.title;
         document.getElementById('stat-area').textContent = p.area;

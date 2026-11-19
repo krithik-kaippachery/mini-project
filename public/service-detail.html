@@ -454,13 +454,18 @@
             updateLightboxView();
         }
 
-        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-        document.getElementById('lightbox-prev').addEventListener('click', prevLightbox);
-        document.getElementById('lightbox-next').addEventListener('click', nextLightbox);
+        const lbClose = document.getElementById('lightbox-close');
+        const lbPrev = document.getElementById('lightbox-prev');
+        const lbNext = document.getElementById('lightbox-next');
+        if (lbClose) lbClose.addEventListener('click', closeLightbox);
+        if (lbPrev) lbPrev.addEventListener('click', prevLightbox);
+        if (lbNext) lbNext.addEventListener('click', nextLightbox);
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+        }
 
         document.addEventListener('keydown', (e) => {
             if (lightbox.classList.contains('active')) {

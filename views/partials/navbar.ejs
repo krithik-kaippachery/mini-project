@@ -9,7 +9,7 @@
     </div>
 
     <div class="nav-user">
-        <div class="user-avatar"><%= user.name.charAt(0).toUpperCase() %></div>
+        <div class="user-avatar"><%= (user && user.name) ? user.name.charAt(0).toUpperCase() : 'U' %></div>
         <form action="/logout" method="POST" style="margin: 0;">
             <button type="submit" class="logout-btn">Log out</button>
         </form>

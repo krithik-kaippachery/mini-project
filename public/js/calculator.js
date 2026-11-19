@@ -26,6 +26,8 @@
     const quoteBtn        = document.getElementById('quote-btn');
     const quoteFeedback   = document.getElementById('quote-feedback');
 
+    if (!sqftSlider || !roomCards.length || !totalPriceEl) return;
+
     // ─── State ────────────────────────────────────────────────────────────────
     let activeRoom = {
         id:        roomCards[0]?.dataset.id   || 'living',
@@ -154,12 +156,14 @@
     });
 
     // ─── Quote Button ─────────────────────────────────────────────────────────
-    quoteBtn.addEventListener('click', () => {
-        quoteBtn.disabled = true;
-        quoteBtn.textContent = '✓ Request Sent!';
-        quoteFeedback.textContent = 'Our design team will contact you within 24 hours.';
-        quoteFeedback.classList.add('show');
-    });
+    if (quoteBtn && quoteFeedback) {
+        quoteBtn.addEventListener('click', () => {
+            quoteBtn.disabled = true;
+            quoteBtn.textContent = '✓ Request Sent!';
+            quoteFeedback.textContent = 'Our design team will contact you within 24 hours.';
+            quoteFeedback.classList.add('show');
+        });
+    }
 
     // ─── Init ─────────────────────────────────────────────────────────────────
     updateSliderFill();

@@ -41,7 +41,7 @@ if (roomType && sqftSlider) {
 }
 
 // Interactive button feedback
-if (bookBtn) {
+if (bookBtn && feedback) {
     bookBtn.addEventListener('click', () => {
         bookBtn.style.display = 'none';
         feedback.style.display = 'block';

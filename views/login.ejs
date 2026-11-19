@@ -42,8 +42,16 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alertBox.style.display = 'block';
+                alertBox.style.background = 'var(--primary-subtle)';
+                alertBox.style.color = 'var(--primary-dark)';
+                alertBox.textContent = 'Please enter both email and password.';
+                return;
+            }
 
             btn.disabled = true;
             btn.textContent = 'Signing in...';

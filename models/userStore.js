@@ -49,6 +49,7 @@ const UserStore = {
 
     // Returns a safe user object (no password)
     safeUser(user) {
+        if (!user) return null;
         const { password, ...safe } = user;
         return safe;
     },

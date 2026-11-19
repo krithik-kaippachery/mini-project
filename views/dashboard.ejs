@@ -13,7 +13,7 @@
     <main class="main-content">
         <div class="page-header fade-up">
             <div class="greeting">Welcome back</div>
-            <h1><%= user.name.split(' ')[0] %>'s Studio</h1>
+            <h1><%= (user && user.name) ? user.name.split(' ')[0] : 'Designer' %>'s Studio</h1>
         </div>
 
         <div class="metrics-grid">
@@ -41,6 +41,7 @@
             </div>
             
             <% if (estimates.length > 0) { %>
+            <div style="overflow-x:auto;">
             <table class="estimates-table">
                 <thead>
                     <tr>
@@ -67,6 +68,7 @@
                 <% }) %>
                 </tbody>
             </table>
+            </div>
             <% } else { %>
                 <div style="text-align:center; padding:60px 0; color:var(--text-muted);">
                     <p>No estimates yet.</p>
