@@ -30,7 +30,7 @@
 
     <!-- Project Hero -->
     <div class="project-hero" id="project-hero">
-        <video id="hero-video" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video id="hero-video" autoplay muted loop playsinline webkit-playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
         <div class="project-hero-content">
             <span class="tag" id="hero-tag"></span>
             <h1 id="hero-title"></h1>
@@ -177,7 +177,19 @@
         const p = projects[id] || projects['azure-villa'];
 
         document.title = `Dreamspace | ${p.title}`;
-        document.getElementById('hero-video').src = p.heroVideo;
+        const heroVid = document.getElementById('hero-video');
+        heroVid.src = p.heroVideo;
+        heroVid.muted = true;
+        const playPromise = heroVid.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                const playOnTouch = () => {
+                    heroVid.play().catch(() => {});
+                    window.removeEventListener('touchstart', playOnTouch);
+                };
+                window.addEventListener('touchstart', playOnTouch, { passive: true });
+            });
+        }
         document.getElementById('hero-tag').textContent = p.tag;
         document.getElementById('hero-title').textContent = p.title;
         document.getElementById('stat-area').textContent = p.area;
@@ -202,6 +214,7 @@
             const img = document.createElement('img');
             img.src = src;
             img.alt = 'Project Gallery';
+            img.loading = 'lazy';
             gallery.appendChild(img);
         });
 

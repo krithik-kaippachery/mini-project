@@ -10,7 +10,7 @@
     <div class="login-page">
         <!-- Left: Visual -->
         <div class="login-visual">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="login-visual-text">
@@ -102,6 +102,21 @@
                 alertBox.textContent = 'Network error. Please try again.';
                 btn.disabled = false;
                 btn.textContent = 'Sign In';
+            }
+        });
+
+        // ─── iOS Safari Video Autoplay Helper ───
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            const playPromise = vid.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    const playOnTouch = () => {
+                        vid.play().catch(() => {});
+                        window.removeEventListener('touchstart', playOnTouch);
+                    };
+                    window.addEventListener('touchstart', playOnTouch, { passive: true });
+                });
             }
         });
     </script>

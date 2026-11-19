@@ -35,7 +35,7 @@
             <p>Our team of visionary architects and meticulous interior designers work in absolute harmony to deliver projects that not only meet your expectations, but redefine them completely.</p>
         </div>
         <div class="about-img reveal-right">
-            <video autoplay muted loop playsinline style="width: 100%; display: block; border-radius: 16px;">
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata" style="width: 100%; display: block; border-radius: 16px;">
                 <source src="images/about-studio.mp4" type="video/mp4">
             </video>
         </div>
@@ -118,6 +118,22 @@
             border-color: var(--primary);
             box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 25px rgba(243, 156, 18, 0.25);
         }
+
+        @media (max-width: 768px) {
+            .philosophy-section {
+                padding: 60px 4%;
+            }
+            .philosophy-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(25, 25, 25, 0.9);
+                padding: 30px 20px;
+                min-width: 100%;
+            }
+            .philosophy-card:hover {
+                transform: none;
+            }
+        }
     </style>
 
     <section class="philosophy-section" id="philosophy-section">
@@ -175,6 +191,21 @@
         }
         window.addEventListener('scroll', reveal);
         reveal();
+
+        // ─── iOS Safari Video Autoplay Helper ───
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            const playPromise = vid.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    const playOnTouch = () => {
+                        vid.play().catch(() => {});
+                        window.removeEventListener('touchstart', playOnTouch);
+                    };
+                    window.addEventListener('touchstart', playOnTouch, { passive: true });
+                });
+            }
+        });
     </script>
     <script src="js/auth-nav.js"></script>
 </body>

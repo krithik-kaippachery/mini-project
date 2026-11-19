@@ -32,7 +32,7 @@
     <!-- Hero with Video Background -->
     <section class="hero">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="hero-content">
@@ -83,7 +83,7 @@
         <div class="services-grid">
             <a href="service-detail.html?id=architecture" class="service-card has-cover reveal">
                 <div class="service-card-cover">
-                    <img src="images/architecture-1.jpg" alt="Architectural Design">
+                    <img src="images/architecture-1.jpg" alt="Architectural Design" loading="lazy">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -100,7 +100,7 @@
             </a>
             <a href="service-detail.html?id=interior" class="service-card has-cover reveal" style="transition-delay:0.1s">
                 <div class="service-card-cover">
-                    <img src="images/interior-1.jpg" alt="Interior Design">
+                    <img src="images/interior-1.jpg" alt="Interior Design" loading="lazy">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -117,7 +117,7 @@
             </a>
             <a href="service-detail.html?id=construction" class="service-card has-cover reveal" style="transition-delay:0.2s">
                 <div class="service-card-cover">
-                    <img src="images/construction-1.jpg" alt="Construction">
+                    <img src="images/construction-1.jpg" alt="Construction" loading="lazy">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -144,9 +144,9 @@
             <span class="slider-label after">DELIVERED</span>
         </div>
         <div class="slider-container reveal" id="slider-container">
-            <img src="images/slider-delivered.jpg" alt="Delivered Room" class="slider-img slider-background">
+            <img src="images/slider-delivered.jpg" alt="Delivered Room" class="slider-img slider-background" loading="lazy">
             <div class="slider-foreground" id="slider-foreground">
-                <img src="images/slider-design.jpg" alt="Design Render">
+                <img src="images/slider-design.jpg" alt="Design Render" loading="lazy">
             </div>
             <div class="slider-handle" id="slider-handle"></div>
             <input type="range" min="0" max="100" value="50" class="slider-range" id="slider-range">
@@ -184,6 +184,21 @@
         }
         window.addEventListener('scroll', reveal);
         reveal();
+
+        // ─── iOS Safari Video Autoplay Helper ───
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            const playPromise = vid.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    const playOnTouch = () => {
+                        vid.play().catch(() => {});
+                        window.removeEventListener('touchstart', playOnTouch);
+                    };
+                    window.addEventListener('touchstart', playOnTouch, { passive: true });
+                });
+            }
+        });
     </script>
     <script src="js/auth-nav.js"></script>
 </body>
