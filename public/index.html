@@ -10,14 +10,12 @@
     <div class="login-page">
         <!-- Left: Visual -->
         <div class="login-visual">
-            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/interior-hero.jpg">
+            <video autoplay muted loop playsinline>
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
-            <div class="login-overlay"></div>
             <div class="login-visual-text">
-                <div class="hero-tagline">ARCHITECTURAL EXCELLENCE</div>
-                <h2>Welcome to<br><span>Dreamspace</span></h2>
-                <p>Where imagination meets bespoke architecture.</p>
+                <h2>Welcome to<br>Dreamspace</h2>
+                <p>Where imagination meets architecture.</p>
             </div>
         </div>
 
@@ -104,21 +102,6 @@
                 alertBox.textContent = 'Network error. Please try again.';
                 btn.disabled = false;
                 btn.textContent = 'Sign In';
-            }
-        });
-
-        // ─── iOS Safari Video Autoplay Helper ───
-        document.querySelectorAll('video').forEach(vid => {
-            vid.muted = true;
-            const playPromise = vid.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    const playOnTouch = () => {
-                        vid.play().catch(() => {});
-                        window.removeEventListener('touchstart', playOnTouch);
-                    };
-                    window.addEventListener('touchstart', playOnTouch, { passive: true });
-                });
             }
         });
     </script>

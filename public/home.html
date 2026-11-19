@@ -18,46 +18,32 @@
             </svg>
             <span>Dreamspace</span>
         </div>
-        <ul class="nav-links" id="nav-links">
+        <ul class="nav-links">
             <li><a href="home.html" class="active">Home</a></li>
-            <li><a href="service-detail.html">Services</a></li>
+            <li><a href="#services-section">Services</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="index.html">Login</a></li>
         </ul>
-        <div class="nav-actions">
-            <a href="contact.html" class="btn-contact">Get a Quote</a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-        <div class="nav-backdrop" id="nav-backdrop"></div>
+        <a href="contact.html" class="btn-contact">Get a Quote</a>
     </nav>
 
-    <!-- Hero with Full-Width Video Background -->
+    <!-- Hero with Video Background -->
     <section class="hero">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/interior-hero.jpg">
+            <video autoplay muted loop playsinline>
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
-            <div class="hero-overlay"></div>
             <div class="hero-content">
-                <div class="hero-tagline">ARCHITECTURAL EXCELLENCE &bull; LUXURY INTERIORS</div>
                 <h1>Design Your<br><span>Dream Space</span></h1>
-                <p>Award-winning architecture and interior design studio crafting timeless, bespoke living experiences.</p>
+                <p>Award-winning architecture and interior design agency crafting timeless living experiences.</p>
                 <div class="hero-cta">
-                    <a href="projects.html" class="btn-primary">View Our Portfolio</a>
-                    <a href="contact.html" class="btn-outline">Consult Our Architects</a>
+                    <a href="projects.html" class="btn-primary">View Our Work</a>
+                    <a href="contact.html" class="btn-outline">Get in Touch</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Statistics Board -->
-    <div class="stats-board-container">
         <div class="stats-board reveal">
             <div class="stat-item">
                 <div class="stat-icon">
@@ -88,7 +74,7 @@
                 <div class="stat-text">Years Of Experience</div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Services Grid -->
     <section class="services-section" id="services-section">
@@ -97,7 +83,7 @@
         <div class="services-grid">
             <a href="service-detail.html?id=architecture" class="service-card has-cover reveal">
                 <div class="service-card-cover">
-                    <img src="images/architecture-1.jpg" alt="Architectural Design" loading="lazy">
+                    <img src="images/architecture-1.jpg" alt="Architectural Design">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -114,7 +100,7 @@
             </a>
             <a href="service-detail.html?id=interior" class="service-card has-cover reveal" style="transition-delay:0.1s">
                 <div class="service-card-cover">
-                    <img src="images/interior-1.jpg" alt="Interior Design" loading="lazy">
+                    <img src="images/interior-1.jpg" alt="Interior Design">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -131,7 +117,7 @@
             </a>
             <a href="service-detail.html?id=construction" class="service-card has-cover reveal" style="transition-delay:0.2s">
                 <div class="service-card-cover">
-                    <img src="images/construction-1.jpg" alt="Construction" loading="lazy">
+                    <img src="images/construction-1.jpg" alt="Construction">
                     <span class="service-card-badge">
                         <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                         10 Photos
@@ -158,9 +144,9 @@
             <span class="slider-label after">DELIVERED</span>
         </div>
         <div class="slider-container reveal" id="slider-container">
-            <img src="images/slider-delivered.jpg" alt="Delivered Room" class="slider-img slider-background" loading="lazy">
+            <img src="images/slider-delivered.jpg" alt="Delivered Room" class="slider-img slider-background">
             <div class="slider-foreground" id="slider-foreground">
-                <img src="images/slider-design.jpg" alt="Design Render" loading="lazy">
+                <img src="images/slider-design.jpg" alt="Design Render">
             </div>
             <div class="slider-handle" id="slider-handle"></div>
             <input type="range" min="0" max="100" value="50" class="slider-range" id="slider-range">
@@ -198,21 +184,6 @@
         }
         window.addEventListener('scroll', reveal);
         reveal();
-
-        // ─── iOS Safari Video Autoplay Helper ───
-        document.querySelectorAll('video').forEach(vid => {
-            vid.muted = true;
-            const playPromise = vid.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    const playOnTouch = () => {
-                        vid.play().catch(() => {});
-                        window.removeEventListener('touchstart', playOnTouch);
-                    };
-                    window.addEventListener('touchstart', playOnTouch, { passive: true });
-                });
-            }
-        });
     </script>
     <script src="js/auth-nav.js"></script>
 </body>
