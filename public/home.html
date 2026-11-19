@@ -18,32 +18,46 @@
             </svg>
             <span>Dreamspace</span>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
             <li><a href="home.html" class="active">Home</a></li>
-            <li><a href="#services-section">Services</a></li>
+            <li><a href="service-detail.html">Services</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="index.html">Login</a></li>
         </ul>
-        <a href="contact.html" class="btn-contact">Get a Quote</a>
+        <div class="nav-actions">
+            <a href="contact.html" class="btn-contact">Get a Quote</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="nav-backdrop" id="nav-backdrop"></div>
     </nav>
 
-    <!-- Hero with Video Background -->
+    <!-- Hero with Full-Width Video Background -->
     <section class="hero">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/interior-hero.jpg">
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
+            <div class="hero-overlay"></div>
             <div class="hero-content">
+                <div class="hero-tagline">ARCHITECTURAL EXCELLENCE &bull; LUXURY INTERIORS</div>
                 <h1>Design Your<br><span>Dream Space</span></h1>
-                <p>Award-winning architecture and interior design agency crafting timeless living experiences.</p>
+                <p>Award-winning architecture and interior design studio crafting timeless, bespoke living experiences.</p>
                 <div class="hero-cta">
-                    <a href="projects.html" class="btn-primary">View Our Work</a>
-                    <a href="contact.html" class="btn-outline">Get in Touch</a>
+                    <a href="projects.html" class="btn-primary">View Our Portfolio</a>
+                    <a href="contact.html" class="btn-outline">Consult Our Architects</a>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Statistics Board -->
+    <div class="stats-board-container">
         <div class="stats-board reveal">
             <div class="stat-item">
                 <div class="stat-icon">
@@ -74,7 +88,7 @@
                 <div class="stat-text">Years Of Experience</div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Services Grid -->
     <section class="services-section" id="services-section">

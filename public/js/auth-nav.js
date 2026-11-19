@@ -71,6 +71,67 @@
             });
     }
 
+    // 3. Mobile Hamburger Navigation
+    function initMobileNav() {
+        const toggle = document.getElementById('nav-toggle');
+        const links = document.getElementById('nav-links') || document.querySelector('.nav-links');
+        const backdrop = document.getElementById('nav-backdrop') || document.querySelector('.nav-backdrop');
+
+        if (toggle && links) {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = links.classList.toggle('open');
+                toggle.classList.toggle('active', isOpen);
+                if (backdrop) backdrop.classList.toggle('open', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            });
+
+            if (backdrop) {
+                backdrop.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.classList.remove('active');
+                    backdrop.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            links.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.classList.remove('active');
+                    if (backdrop) backdrop.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && links.classList.contains('open')) {
+                    links.classList.remove('open');
+                    toggle.classList.remove('active');
+                    if (backdrop) backdrop.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+    }
+
+    // 4. Hero Video Autoplay Resilience (Mobile iOS Safari & Desktop)
+    function initHeroVideos() {
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            const playPromise = vid.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    const playOnTouch = () => {
+                        vid.play().catch(() => {});
+                        window.removeEventListener('touchstart', playOnTouch);
+                    };
+                    window.addEventListener('touchstart', playOnTouch, { passive: true, once: true });
+                });
+            }
+        });
+    }
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             const cached = localStorage.getItem('dreamspace_user');
@@ -78,8 +139,12 @@
                 try { setAuthState(true, JSON.parse(cached)); } catch { setAuthState(true, null); }
             }
             verifyWithServer();
+            initMobileNav();
+            initHeroVideos();
         });
     } else {
         verifyWithServer();
+        initMobileNav();
+        initHeroVideos();
     }
 })();

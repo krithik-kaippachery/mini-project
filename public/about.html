@@ -17,7 +17,7 @@
             </svg>
             <span>Dreamspace</span>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
             <li><a href="home.html">Home</a></li>
             <li><a href="service-detail.html">Services</a></li>
             <li><a href="about.html" class="active">About Us</a></li>
@@ -25,17 +25,26 @@
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="index.html">Login</a></li>
         </ul>
-        <a href="contact.html" class="btn-contact">Get a Quote</a>
+        <div class="nav-actions">
+            <a href="contact.html" class="btn-contact">Get a Quote</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="nav-backdrop" id="nav-backdrop"></div>
     </nav>
 
     <section class="about-hero">
         <div class="about-text reveal-left">
+            <div class="hero-tagline">BESPOKE ARCHITECTURE &bull; EST. 1994</div>
             <h1 style="line-height: 1.1;">Crafting Timeless <br><span>Spaces</span> Since 1994</h1>
             <p style="margin-top:20px;">At Dreamspace, we believe that interior design is more than just arranging furniture. It's about understanding the people who live in those spaces and translating their personalities into physical form.</p>
             <p>Our team of visionary architects and meticulous interior designers work in absolute harmony to deliver projects that not only meet your expectations, but redefine them completely.</p>
         </div>
         <div class="about-img reveal-right">
-            <video autoplay muted loop playsinline webkit-playsinline preload="metadata" style="width: 100%; display: block; border-radius: 16px;">
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/architecture-hero.jpg" style="width: 100%; display: block; border-radius: 16px;">
                 <source src="images/about-studio.mp4" type="video/mp4">
             </video>
         </div>
