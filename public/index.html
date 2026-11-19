@@ -10,7 +10,7 @@
     <div class="login-page">
         <!-- Left: Visual -->
         <div class="login-visual">
-            <video autoplay muted loop playsinline webkit-playsinline>
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/interior-hero.jpg">
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="login-visual-text">
@@ -105,9 +105,13 @@
             }
         });
 
-        const video = document.querySelector('.login-visual video');
-        if (video) video.muted = true;
-        if (video) video.play().catch(() => {});
+        window.addEventListener('load', function() {
+            var video = document.querySelector('.login-visual video') || document.querySelector('video');
+            if (video) {
+                video.muted = true;
+                video.play().catch(function() {});
+            }
+        });
     </script>
 </body>
 </html>

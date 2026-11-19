@@ -32,7 +32,7 @@
     <!-- Hero with Video Background -->
     <section class="hero">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline webkit-playsinline>
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/interior-hero.jpg">
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="hero-content">
@@ -185,9 +185,13 @@
         window.addEventListener('scroll', reveal);
         reveal();
 
-        const video = document.querySelector('.hero-video-wrapper video');
-        if (video) video.muted = true;
-        if (video) video.play().catch(() => {});
+        window.addEventListener('load', function() {
+            var video = document.querySelector('.hero-video-wrapper video') || document.querySelector('video');
+            if (video) {
+                video.muted = true;
+                video.play().catch(function() {});
+            }
+        });
     </script>
     <script src="js/auth-nav.js"></script>
 </body>
