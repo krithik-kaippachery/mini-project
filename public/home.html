@@ -32,8 +32,8 @@
     <!-- Hero with Video Background -->
     <section class="hero">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/hero-ios-poster.jpg" src="/hero-ios.mp4">
-                <source src="/hero-ios.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline>
+                <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="hero-content">
                 <h1>Design Your<br><span>Dream Space</span></h1>
@@ -184,14 +184,6 @@
         }
         window.addEventListener('scroll', reveal);
         reveal();
-
-        window.addEventListener('load', function() {
-            var video = document.querySelector('.hero-video-wrapper video') || document.querySelector('video');
-            if (video) {
-                video.muted = true;
-                video.play().catch(function() {});
-            }
-        });
     </script>
     <script src="js/auth-nav.js"></script>
 </body>
