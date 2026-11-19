@@ -35,7 +35,7 @@
             <p>Our team of visionary architects and meticulous interior designers work in absolute harmony to deliver projects that not only meet your expectations, but redefine them completely.</p>
         </div>
         <div class="about-img reveal-right">
-            <video autoplay muted loop playsinline style="width: 100%; display: block; border-radius: 16px;">
+            <video autoplay muted loop playsinline webkit-playsinline style="width: 100%; display: block; border-radius: 16px;">
                 <source src="images/about-studio.mp4" type="video/mp4">
             </video>
         </div>
@@ -175,6 +175,10 @@
         }
         window.addEventListener('scroll', reveal);
         reveal();
+
+        const video = document.querySelector('.about-img video');
+        if (video) video.muted = true;
+        if (video) video.play().catch(() => {});
     </script>
     <script src="js/auth-nav.js"></script>
 </body>

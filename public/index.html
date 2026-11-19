@@ -10,7 +10,7 @@
     <div class="login-page">
         <!-- Left: Visual -->
         <div class="login-visual">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline webkit-playsinline>
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="login-visual-text">
@@ -104,6 +104,10 @@
                 btn.textContent = 'Sign In';
             }
         });
+
+        const video = document.querySelector('.login-visual video');
+        if (video) video.muted = true;
+        if (video) video.play().catch(() => {});
     </script>
 </body>
 </html>

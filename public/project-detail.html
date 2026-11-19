@@ -30,7 +30,7 @@
 
     <!-- Project Hero -->
     <div class="project-hero" id="project-hero">
-        <video id="hero-video" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video id="hero-video" autoplay muted loop playsinline webkit-playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
         <div class="project-hero-content">
             <span class="tag" id="hero-tag"></span>
             <h1 id="hero-title"></h1>
@@ -177,7 +177,10 @@
         const p = projects[id] || projects['azure-villa'];
 
         document.title = `Dreamspace | ${p.title}`;
-        document.getElementById('hero-video').src = p.heroVideo;
+        const video = document.getElementById('hero-video');
+        video.src = p.heroVideo;
+        video.muted = true;
+        video.play().catch(() => {});
         document.getElementById('hero-tag').textContent = p.tag;
         document.getElementById('hero-title').textContent = p.title;
         document.getElementById('stat-area').textContent = p.area;
